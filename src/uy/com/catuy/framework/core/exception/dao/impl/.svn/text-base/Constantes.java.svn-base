@@ -1,0 +1,53 @@
+/*
+ * Constantes.java
+ *
+ * Proyecto: Marco de Desarrollo de Aplicaciones CA&T Uruguay
+ *
+ * Fecha de creaci�n: Oct 6, 2009
+ *
+ * Autor: Juan Andres Martinez Chaine
+ */
+package uy.com.catuy.framework.core.exception.dao.impl;
+
+/**
+ * Constantes para la implementacion del DAO de excepciones.
+ * 
+ * @author Juan Andres Martinez Chaine ($LastChangedBy: 801678 $)
+ * 
+ * @version $LastChangedRevision: 268 $ $LastChangedDate: 2009-12-03 15:42:17 -0200 (Thu, 03 Dec 2009) $
+ */
+public final class Constantes {
+
+	/**
+	 * Constructor para la clase Constantes (privado para evitar creacion de instancias).
+	 */
+	private Constantes() {
+
+	}
+
+	/**
+	 * String utilizado para separar el codigo de modulo del identificador de mensaje.
+	 */
+	public static final String SEPARADOR_MODULO_ID = "-";
+
+	/**
+	 * String utilizado para separar el codigo de una excepcion de su mensaje.
+	 */
+	public static final String SEPARADOR_CODIGO_MENSAJE = " - ";
+
+	/**
+	 * Clave utilizada por omision para obtener desde un bundle el mensaje generico de excepcion.
+	 */
+	public static final String DEFAULT_GENERIC_MESSAGE_KEY = "mx.gob.imss.cia.framework.core.exception.DEFAULT_MESSAGE";
+
+	/**
+	 * Mensaje para la excepcion ocurrida en caso de que no se inyecte la propiedad 'exceptionMessageClass'.
+	 */
+	public static final String EXCEPTION_NO_MESSAGE_CLASS = "La propiedad 'exceptionMessageClass' no puede ser nula";
+
+	/**
+	 * Mensaje para el caso en que no se encuentre el mensaje de excepcion en la base de datos.
+	 */
+	public static final String EXCEPTION_NO_MESSAGE_FOUND = "Ha ocurrido un error interno en el sistema. Por favor contacte a su administrador";
+
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- Session Factory -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="FrameworkPersistence" />
+		<property name="persistenceXmlLocation" value="classpath:persistence.xml" />
+	</bean>
+
+	<!-- Transaction Manager -->
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<!-- JPA Template -->
+	<bean id="jpaTemplate" class="org.springframework.orm.jpa.JpaTemplate">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<!-- Gestion de Excepciones de Negocio -->
+	<bean id="jpaBusinessExceptionDAO"
+		class="mx.gob.imss.cia.framework.core.exception.dao.impl.JpaExceptionDaoImpl">
+		<property name="jpaTemplate" ref="jpaTemplate" />
+		<property name="exceptionMessageClass" value="mx.gob.imss.cia.framework.core.exception.hbm.BusinessExceptionMessage" />
+		<property name="appendMessageCode" value="true" />
+	</bean>
+	<!-- Fin Excepciones de Negocio -->
+
+	<!-- Gestion de Excepciones de Infraestructura -->
+	<bean id="jpaInfrastructureExceptionDAO"
+		class="mx.gob.imss.cia.framework.core.exception.dao.impl.JpaExceptionDaoImpl">
+		<property name="jpaTemplate" ref="jpaTemplate" />
+		<property name="exceptionMessageClass" value="mx.gob.imss.cia.framework.core.exception.hbm.InfrastructureExceptionMessage" />
+	</bean>
+	<!-- Fin Excepciones de Infraestructura -->
+
+	<!-- Configuracion del Factory para JPA -->
+	<bean id="jpaExceptionDAOFactory"
+		class="mx.gob.imss.cia.framework.core.exception.dao.ExceptionDaoFactory">
+		<property name="businessExceptionDao" ref="jpaBusinessExceptionDAO" />
+		<property name="infrastructureExceptionDao" ref="jpaInfrastructureExceptionDAO" />
+	</bean>
+</beans>

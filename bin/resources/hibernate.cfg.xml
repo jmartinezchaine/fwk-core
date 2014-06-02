@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.url">jdbc:mysql://192.168.91.5:3306/conmutron</property>
+    <property name="hibernate.connection.username">conmuadm</property>
+    <property name="hibernate.connection.password">admin</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+    <property name="hibernate.max_fetch_depth">3</property>
+    <property name="hibernate.cache.use_query_cache">false</property>
+    <property name="hibernate.cache.provider_class">net.sf.ehcache.hibernate.EhCacheProvider</property>
+    <property name="hibernate.query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
+    <property name="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</property>
+    <property name="hibernate.show_sql">false</property>
+    <property name="hibernate.format_sql">false</property>
+    <property name="hibernate.transaction.factory_class">org.springframework.orm.hibernate3.SpringTransactionFactory</property>
+    <property name="hibernate.hbm2ddl.auto">none</property>
+    <property name="hibernate.format_sql">false</property>
+    <mapping
+      class="uy.com.catuy.framework.core.exception.hbm.AbstractExceptionMessage" />
+    <mapping
+      class="uy.com.catuy.framework.core.exception.hbm.BusinessExceptionMessage" />
+    <mapping
+      class="uy.com.catuy.framework.core.exception.hbm.ExceptionMessageId" />
+    <mapping
+      class="uy.com.catuy.framework.core.exception.hbm.InfrastructureExceptionMessage" />
+    <class-cache
+      class="uy.com.catuy.framework.core.exception.hbm.BusinessExceptionMessage"
+      usage="read-only" />
+    <class-cache
+      class="uy.com.catuy.framework.core.exception.hbm.InfrastructureExceptionMessage"
+      usage="read-only" />
+  </session-factory>
+</hibernate-configuration>

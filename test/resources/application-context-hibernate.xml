@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- Session Factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	</bean>
+
+	<!-- Transaction Manager -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Hibernate Template -->
+	<bean id="hTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Gestion de Excepciones de Negocio -->
+	<bean id="hibernateBusinessExceptionDAO"
+		class="uy.com.catuy.framework.core.exception.dao.impl.HibernateExceptionDaoImpl">
+		<property name="hibernateTemplate" ref="hTemplate" />
+		<property name="exceptionMessageClass" value="uy.com.catuy.framework.core.exception.hbm.BusinessExceptionMessage" />
+		<property name="resourceBundleLocation" value="classpath:exception.properties"/>
+		<property name="errorMessageKey" value="uy.com.catuy.framework.core.exception.test.DEFAULT_MESSAGE"/>
+	</bean>
+	<!-- Fin Excepciones de Negocio -->
+
+	<!-- Gestion de Excepciones de Infraestructura -->
+	<bean id="hibernateInfrastructureExceptionDAO"
+		class="uy.com.catuy.framework.core.exception.dao.impl.HibernateExceptionDaoImpl">
+		<property name="hibernateTemplate" ref="hTemplate" />
+		<property name="exceptionMessageClass" value="uy.com.catuy.framework.core.exception.hbm.InfrastructureExceptionMessage" />
+		<property name="appendMessageCode" value="true"/>
+	</bean>
+	<!-- Fin Excepciones de Infraestructura -->
+
+	<!-- Configuracion del Factory para Hibernate -->
+	<bean id="hibernateExceptionDAOFactory"
+		class="uy.com.catuy.framework.core.exception.dao.ExceptionDaoFactory">
+		<property name="businessExceptionDao" ref="hibernateBusinessExceptionDAO" />
+		<property name="infrastructureExceptionDao" ref="hibernateInfrastructureExceptionDAO" />
+	</bean>
+</beans>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@192.168.99.21:1521:IMSSDESA</property>
+		<property name="hibernate.connection.username">NECEFWK</property>
+		<property name="hibernate.connection.password">NECEFWK</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="hibernate.max_fetch_depth">3</property>
+		<property name="hibernate.cache.use_query_cache">false</property>
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.provider_class">net.sf.ehcache.hibernate.EhCacheProvider</property>
+		<property name="hibernate.query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
+		<property name="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.transaction.factory_class">org.springframework.orm.hibernate3.SpringTransactionFactory</property>
+		<mapping
+			class="mx.gob.imss.cia.framework.core.exception.hbm.AbstractExceptionMessage" />
+		<mapping
+			class="mx.gob.imss.cia.framework.core.exception.hbm.BusinessExceptionMessage" />
+		<mapping
+			class="mx.gob.imss.cia.framework.core.exception.hbm.ExceptionMessageId" />
+		<mapping
+			class="mx.gob.imss.cia.framework.core.exception.hbm.InfrastructureExceptionMessage" />
+		<class-cache class="mx.gob.imss.cia.framework.core.exception.hbm.BusinessExceptionMessage" usage="read-only" />
+		<class-cache class="mx.gob.imss.cia.framework.core.exception.hbm.InfrastructureExceptionMessage" usage="read-only" />
+	</session-factory>
+</hibernate-configuration>

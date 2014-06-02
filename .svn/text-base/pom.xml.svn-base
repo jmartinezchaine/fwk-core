@@ -1,0 +1,15 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<parent>
+		<artifactId>Conmutron</artifactId>
+		<groupId>Conmutron</groupId>
+		<version>0.0.1-dev1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+  <groupId>fwk-catuy-core</groupId>
+  <artifactId>fwk-catuy-core</artifactId>
+  <name>framework-catuy-core</name>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>Core del framework de desarrollo CA&amp;T Uruguay</description>
+  <packaging>pom</packaging>
+</project>
